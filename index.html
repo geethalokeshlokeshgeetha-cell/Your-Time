@@ -1,0 +1,859 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Our Little Date 💕</title>
+
+<style>
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+
+    font-family: Georgia, "Times New Roman", serif;
+
+    background:
+        linear-gradient(
+            135deg,
+            #ffe8ef,
+            #fff7f2,
+            #f7e8ff
+        );
+
+    color: #5a3040;
+}
+
+/* Main Card */
+.card {
+    width: min(92%, 520px);
+
+    padding: 42px 28px;
+
+    text-align: center;
+
+    border-radius: 30px;
+
+    background: rgba(255,255,255,0.80);
+
+    backdrop-filter: blur(12px);
+
+    box-shadow:
+        0 20px 60px rgba(133,67,95,0.18);
+
+    position: relative;
+
+    z-index: 2;
+}
+
+/* Headings */
+
+h1 {
+    font-size: clamp(25px, 6vw, 35px);
+
+    margin-bottom: 20px;
+}
+
+.question {
+    font-size: clamp(23px, 6vw, 32px);
+
+    font-weight: bold;
+
+    margin: 15px 0 28px;
+}
+
+.sub {
+    font-family: Arial, sans-serif;
+
+    color: #8b6470;
+
+    line-height: 1.6;
+}
+
+/* Buttons area */
+
+.buttons {
+    position: relative;
+
+    height: 100px;
+
+    margin-top: 25px;
+}
+
+/* Buttons */
+
+button {
+    border: none;
+
+    border-radius: 999px;
+
+    padding: 14px 27px;
+
+    font-size: 17px;
+
+    font-weight: bold;
+
+    cursor: pointer;
+
+    font-family: Arial, sans-serif;
+}
+
+/* YES */
+
+.yes {
+    background: #e85d83;
+
+    color: white;
+
+    box-shadow:
+        0 9px 20px rgba(232,93,131,0.28);
+
+    position: relative;
+
+    z-index: 3;
+}
+
+.yes:hover {
+    transform: translateY(-3px) scale(1.04);
+}
+
+/* NO */
+
+.no {
+    background: #f1dce3;
+
+    color: #7b5360;
+
+    position: absolute;
+
+    left: calc(50% + 55px);
+
+    top: 10px;
+
+    z-index: 4;
+
+    transition:
+        left 0.18s ease,
+        top 0.18s ease,
+        transform 0.18s ease;
+}
+
+/* Inputs */
+
+.field {
+    width: 100%;
+
+    margin: 10px 0;
+
+    padding: 14px 16px;
+
+    border: 1px solid #edc9d4;
+
+    border-radius: 16px;
+
+    background: #fffafc;
+
+    color: #5a3040;
+
+    font-size: 16px;
+}
+
+/* Submit button */
+
+.confirm {
+    width: 100%;
+
+    margin-top: 10px;
+
+    background: #e85d83;
+
+    color: white;
+
+    box-shadow:
+        0 8px 18px rgba(232,93,131,0.25);
+}
+
+.confirm:hover {
+    transform: translateY(-2px);
+}
+
+.confirm:disabled {
+    opacity: 0.6;
+
+    cursor: wait;
+}
+
+/* Hidden */
+
+.hidden {
+    display: none;
+}
+
+/* Small text */
+
+.note {
+    font-size: 13px;
+
+    margin-top: 18px;
+
+    color: #9a7480;
+
+    font-family: Arial, sans-serif;
+}
+
+.saved-note {
+    font-size: 12px;
+
+    color: #9a7480;
+
+    font-family: Arial, sans-serif;
+
+    margin-top: 12px;
+}
+
+/* Status */
+
+.status {
+    font-family: Arial, sans-serif;
+
+    font-size: 14px;
+
+    margin-top: 12px;
+
+    min-height: 20px;
+}
+
+/* Floating hearts */
+
+.heart {
+    position: fixed;
+
+    bottom: -40px;
+
+    font-size: 22px;
+
+    opacity: 0.65;
+
+    animation:
+        float 7s linear infinite;
+
+    z-index: 1;
+}
+
+@keyframes float {
+
+    to {
+        transform:
+            translateY(-115vh)
+            rotate(25deg);
+
+        opacity: 0;
+    }
+}
+
+/* Sparkles */
+
+.sparkle {
+    position: absolute;
+
+    font-size: 22px;
+
+    animation:
+        pulse 2s ease-in-out infinite;
+}
+
+@keyframes pulse {
+
+    50% {
+        transform: scale(1.25);
+
+        opacity: 0.55;
+    }
+}
+</style>
+
+</head>
+
+<body>
+
+<!-- Floating hearts -->
+<div id="hearts"></div>
+
+
+<main class="card">
+
+    <!-- Decorative sparkles -->
+
+    <div
+        class="sparkle"
+        style="left:25px;top:20px;"
+    >
+        ✨
+    </div>
+
+    <div
+        class="sparkle"
+        style="right:25px;top:35px;"
+    >
+        💫
+    </div>
+
+
+    <!-- ========================= -->
+    <!-- FIRST PAGE -->
+    <!-- ========================= -->
+
+    <section id="invite">
+
+        <h1>
+            Hey you… 💕
+        </h1>
+
+
+        <p class="question">
+            I have a little question for you…
+        </p>
+
+
+        <p class="question">
+            Will you go on a date with me? 🥺❤️
+        </p>
+
+
+        <div
+            class="buttons"
+            id="buttonArea"
+        >
+
+            <!-- YES BUTTON -->
+
+            <button
+                class="yes"
+                onclick="sayYes()"
+            >
+                YES ❤️
+            </button>
+
+
+            <!-- NO BUTTON -->
+
+            <button
+                class="no"
+                id="noBtn"
+                type="button"
+            >
+                NO 🙈
+            </button>
+
+        </div>
+
+
+        <p class="note">
+            Only one answer is allowed… 😌💕
+        </p>
+
+    </section>
+
+
+
+    <!-- ========================= -->
+    <!-- DATE DETAILS PAGE -->
+    <!-- ========================= -->
+
+    <section
+        id="yesPage"
+        class="hidden"
+    >
+
+        <h1>
+            Yayyy! 🥰❤️
+        </h1>
+
+
+        <p class="sub">
+
+            You just made me the happiest!
+
+            Now choose the perfect
+
+            <b>DATE & TIME ⏰</b>
+
+            and
+
+            <b>PLACE 📍</b>
+
+            for our date!
+
+        </p>
+
+
+        <!-- ===================================== -->
+        <!-- FORMSUBMIT FORM -->
+        <!-- ===================================== -->
+
+        <form
+            id="dateForm"
+
+            action="https://formsubmit.co/chandanacl0926@gmail.com"
+
+            method="POST"
+        >
+
+
+            <!-- DATE AND TIME -->
+
+            <input
+                class="field"
+
+                type="datetime-local"
+
+                id="dateTime"
+
+                name="date_time"
+
+                required
+            >
+
+
+            <!-- PLACE -->
+
+            <input
+                class="field"
+
+                type="text"
+
+                id="place"
+
+                name="place"
+
+                placeholder="Place 📍"
+
+                required
+            >
+
+
+            <!-- EMAIL SUBJECT -->
+
+            <input
+                type="hidden"
+
+                name="_subject"
+
+                value="💕 New Date Confirmation"
+            >
+
+
+            <!-- EMAIL TEMPLATE -->
+
+            <input
+                type="hidden"
+
+                name="_template"
+
+                value="table"
+            >
+
+
+            <!-- CAPTCHA -->
+
+            <input
+                type="hidden"
+
+                name="_captcha"
+
+                value="false"
+            >
+
+
+            <!-- REDIRECT -->
+
+            <input
+                type="hidden"
+
+                name="_next"
+
+                value=" https://yourname.github.io/date-invitation"
+
+
+            <!-- SUBMIT BUTTON -->
+
+            <button
+                class="confirm"
+                type="submit"
+                id="confirmBtn"
+            >
+                It's a date! 💕
+            </button>
+
+
+        </form>
+
+
+        <p class="saved-note">
+
+            Your date details will be saved on this device
+            and sent to me. 💌
+
+        </p>
+
+
+        <div
+            class="status"
+            id="status"
+        ></div>
+
+    </section>
+
+
+
+    <!-- ========================= -->
+    <!-- FINAL PAGE -->
+    <!-- ========================= -->
+
+    <section
+        id="donePage"
+        class="hidden"
+    >
+
+        <h1>
+            It's a date! 💕
+        </h1>
+
+
+        <p
+            class="sub"
+            id="details"
+        ></p>
+
+
+        <p
+            class="question"
+            style="font-size:22px;"
+        >
+            I can't wait to spend that time with you. ❤️
+        </p>
+
+
+        <p class="sub">
+
+            <b>
+                And just so you know…
+                I love you more than words can ever explain. ❤️✨
+            </b>
+
+        </p>
+
+    </section>
+
+</main>
+
+
+
+<script>
+
+/* =========================================
+   LOCAL STORAGE
+========================================= */
+
+const STORAGE_KEY = "our_little_date";
+
+
+/* =========================================
+   YES BUTTON
+========================================= */
+
+function sayYes() {
+
+    document
+        .getElementById("invite")
+        .classList
+        .add("hidden");
+
+
+    document
+        .getElementById("yesPage")
+        .classList
+        .remove("hidden");
+
+}
+
+
+
+/* =========================================
+   MOVING NO BUTTON
+========================================= */
+
+const noBtn =
+    document.getElementById("noBtn");
+
+const buttonArea =
+    document.getElementById("buttonArea");
+
+
+function moveNoButton() {
+
+    const area =
+        buttonArea.getBoundingClientRect();
+
+
+    const btn =
+        noBtn.getBoundingClientRect();
+
+
+    const maxX =
+        Math.max(
+            0,
+            area.width - btn.width
+        );
+
+
+    const maxY =
+        Math.max(
+            0,
+            area.height - btn.height
+        );
+
+
+    const x =
+        Math.random() * maxX;
+
+
+    const y =
+        Math.random() * maxY;
+
+
+    noBtn.style.left =
+        x + "px";
+
+
+    noBtn.style.top =
+        y + "px";
+
+
+    noBtn.style.transform =
+        "rotate(" +
+        (Math.random() * 14 - 7) +
+        "deg)";
+}
+
+
+/* Mouse */
+
+noBtn.addEventListener(
+    "mouseenter",
+    moveNoButton
+);
+
+
+/* Mouse / touch */
+
+noBtn.addEventListener(
+    "pointerdown",
+    function(event) {
+
+        event.preventDefault();
+
+        moveNoButton();
+
+    }
+);
+
+
+/* Click */
+
+noBtn.addEventListener(
+    "click",
+    function(event) {
+
+        event.preventDefault();
+
+        moveNoButton();
+
+    }
+);
+
+
+/* Mobile touch */
+
+noBtn.addEventListener(
+    "touchstart",
+    function(event) {
+
+        event.preventDefault();
+
+        moveNoButton();
+
+    },
+    {
+        passive: false
+    }
+);
+
+
+
+/* =========================================
+   FORM SUBMISSION
+========================================= */
+
+const dateForm =
+    document.getElementById("dateForm");
+
+
+dateForm.addEventListener(
+    "submit",
+    function(event) {
+
+        /*
+         IMPORTANT:
+
+         FormSubmit needs the normal form
+         submission to happen.
+
+         So we save the information locally,
+         then allow FormSubmit to receive it.
+        */
+
+
+        const dateTime =
+            document.getElementById(
+                "dateTime"
+            ).value;
+
+
+        const place =
+            document.getElementById(
+                "place"
+            ).value.trim();
+
+
+        if (!dateTime || !place) {
+
+            event.preventDefault();
+
+            return;
+
+        }
+
+
+        /* Convert date to readable format */
+
+        const date =
+            new Date(dateTime);
+
+
+        const formattedDate =
+            date.toLocaleString(
+                [],
+                {
+                    dateStyle: "full",
+                    timeStyle: "short"
+                }
+            );
+
+
+        /* Save locally */
+
+        const dateData = {
+
+            dateTime: dateTime,
+
+            place: place,
+
+            formattedDateTime:
+                formattedDate,
+
+            savedAt:
+                new Date().toISOString()
+
+        };
+
+
+        localStorage.setItem(
+            STORAGE_KEY,
+            JSON.stringify(dateData)
+        );
+
+
+        /*
+         Change button while
+         FormSubmit is processing.
+        */
+
+        const button =
+            document.getElementById(
+                "confirmBtn"
+            );
+
+
+        button.disabled = true;
+
+        button.textContent =
+            "Sending... 💌";
+
+
+        /*
+         IMPORTANT:
+
+         We do NOT preventDefault().
+
+         The form will actually submit
+         to FormSubmit.
+        */
+
+    }
+);
+
+
+
+/* =========================================
+   FLOATING HEARTS
+========================================= */
+
+for (
+    let i = 0;
+    i < 18;
+    i++
+) {
+
+    const heart =
+        document.createElement("span");
+
+
+    heart.className =
+        "heart";
+
+
+    heart.textContent =
+        ["♡", "♥", "✨"][i % 3];
+
+
+    heart.style.left =
+        Math.random() * 100 + "%";
+
+
+    heart.style.animationDelay =
+        Math.random() * 7 + "s";
+
+
+    heart.style.animationDuration =
+        (5 + Math.random() * 5) + "s";
+
+
+    document
+        .getElementById("hearts")
+        .appendChild(heart);
+
+}
+
+</script>
+
+</body>
+</html>

@@ -408,6 +408,25 @@ button {
         >
 
 
+            <!-- NAME -->
+
+            <input
+                class="field"
+
+                type="text"
+
+                id="name"
+
+                name="name"
+
+                placeholder="Your Name 💕"
+
+                autocomplete="name"
+
+                required
+            >
+
+
             <!-- DATE AND TIME -->
 
             <input
@@ -722,6 +741,12 @@ dateForm.addEventListener(
         */
 
 
+        const name =
+            document.getElementById(
+                "name"
+            ).value.trim();
+
+
         const dateTime =
             document.getElementById(
                 "dateTime"
@@ -734,7 +759,7 @@ dateForm.addEventListener(
             ).value.trim();
 
 
-        if (!dateTime || !place) {
+        if (!name || !dateTime || !place) {
 
             event.preventDefault();
 
@@ -762,6 +787,8 @@ dateForm.addEventListener(
         /* Save locally */
 
         const dateData = {
+
+            name: name,
 
             dateTime: dateTime,
 
